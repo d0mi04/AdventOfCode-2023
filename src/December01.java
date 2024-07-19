@@ -1,19 +1,16 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import shared.DataSet;
 
 public class December01 {
     public static void main(String[] args) {
-        Lines lines = new Lines("src/input-01.txt");
+        DataSet file = new DataSet("src/input-01.txt");
 
-        Part1(lines);
-        Part2(lines);
+        Part1(file);
+        Part2(file);
     }
 
-    public static void Part2 (Lines lines) {
+    public static void Part2 (DataSet file) {
         int sum = 0;
-        for(String line : lines.lines) {
+        for(String line : file.getLines()) {
             Word word = new Word(line);
             sum += word.number;
         }
@@ -21,9 +18,9 @@ public class December01 {
         System.out.printf("Sum2 of calibration values: %d\n", sum);
     }
 
-    public static void Part1 (Lines lines) {
+    public static void Part1 (DataSet file) {
         int sum = 0;
-        for(String line : lines.lines) {
+        for(String line : file.getLines()) {
             Number number = new Number(line);
             sum += number.number;
         }
