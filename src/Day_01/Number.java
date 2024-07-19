@@ -1,3 +1,5 @@
+package Day_01;
+
 public class Number {
     String firstDigit;
     String lastDigit;
