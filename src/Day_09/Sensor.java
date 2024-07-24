@@ -1,6 +1,7 @@
 package Day_09;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Sensor {
     ArrayList<Integer> sensor;
@@ -10,6 +11,23 @@ public class Sensor {
         setSensor(line);
     }
 
+    // part 2:
+    public int BackwardsPredictions () {
+        predictionProcess.getLast().addFirst(0);
+        int prediction = 0;
+        for(int i = predictionProcess.size() - 1; i > 0; i--) {
+            ArrayList<Integer> currentSensor = predictionProcess.get(i);
+            ArrayList<Integer> previousSensor = predictionProcess.get(i - 1);
+
+            prediction = previousSensor.getFirst() - currentSensor.getFirst();
+            previousSensor.addFirst(prediction);
+        }
+
+        return prediction;
+    }
+
+
+    // part 1:
     public int findPredictions () {
         predictionProcess.getLast().add(0);
         int prediction = 0;

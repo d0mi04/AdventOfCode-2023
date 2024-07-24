@@ -6,26 +6,20 @@ import java.util.ArrayList;
 
 public class Oasis {
     ArrayList<String> history;
+    ArrayList<Sensor> sensors;
 
     public Oasis (DataSet file) {
         setHistory(file);
+        setSensors();
     }
 
-    public void countPredictions() {
-        ArrayList<Sensor> sensors = new ArrayList<>();
+    public void setSensors() {
+        sensors = new ArrayList<>();
         int sum = 0;
         for(String hist : history) {
             Sensor sensor = new Sensor(hist);
             sensors.add(sensor);
         }
-
-        for(Sensor sensor : sensors) {
-            sensor.setPredictionProcess();
-            sum += sensor.findPredictions();
-//            System.out.println(sensor.findPredictions());
-        }
-
-        System.out.println(sum);
     }
 
     public void setHistory (DataSet file) {
