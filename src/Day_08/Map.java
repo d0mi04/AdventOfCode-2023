@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Map {
+    // part 1:
     ArrayList<Node> mapOfNodes;
     ArrayList<Character> steps;
 
@@ -23,15 +24,16 @@ public class Map {
         return null;
     }
 
+    // part 1:
     public int move () {
         Node currentStep = findNode("AAA"); // first step
-        boolean isExitfound = false;
+        boolean exit = false;
 
         int howManySteps = 0;
-        while (!isExitfound) {
+        while (!exit) {
             for(Character step : steps) {
                 if(Objects.equals(currentStep.value, "ZZZ")) {
-                    isExitfound = true;
+                    exit = true;
                     break;
                 } else if (step == 'L') {
                     howManySteps++;
@@ -39,7 +41,6 @@ public class Map {
                 } else if (step == 'R') {
                     howManySteps++;
                     currentStep = findNode(currentStep.right);
-
                 }
             }
         }
