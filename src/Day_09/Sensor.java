@@ -3,28 +3,84 @@ package Day_09;
 import java.util.ArrayList;
 
 public class Sensor {
-    ArrayList<Integer> inputSensor;
-    ArrayList<Node> differenceSensor;
+    ArrayList<Integer> sensor;
+    ArrayList<ArrayList<Integer>> predictionProcess;
 
     public Sensor (String line) {
-        setInputSensor(line);
+        setSensor(line);
     }
 
-    public void setSensor() {
-        differenceSensor = new ArrayList<>();
-        for(int i = 0; i < inputSensor.size() - 1; i++) {
-            int previous = inputSensor.get(i);
-            int next = inputSensor.get(i + 1);
-            int difference = next - previous;
-            differenceSensor.add(new Node(previous, next, difference));
+    public int findPredictions () {
+        predictionProcess.getLast().add(0);
+        int prediction = 0;
+        for(int i = predictionProcess.size() - 1; i > 0; i--) {
+            ArrayList<Integer> currentSensor = predictionProcess.get(i);
+            ArrayList<Integer> previousSensor = predictionProcess.get(i - 1);
+
+            prediction = previousSensor.getLast() + currentSensor.getLast();
+//            System.out.println("prediction sum: " + previousSensor.getLast() + " " + currentSensor.getLast());
+            previousSensor.add(prediction);
+//            System.out.println("Prediction: " + previousSensor.getLast());
         }
+        return prediction;
     }
 
-    public void setInputSensor (String line) {
-        inputSensor = new ArrayList<>();
-        String[] split = line.split("\\s+");
+    public boolean allZeros(ArrayList<Integer> nextLine) {
+        for(int value : nextLine) {
+            if(value != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ArrayList<Integer> createNextSensor(ArrayList<Integer> sensor) {
+        ArrayList<Integer> nextSensor = new ArrayList<>();
+
+        for(int i = 0; i < sensor.size() - 1; i++) {
+            nextSensor.add(sensor.get(i + 1) - sensor.get(i));
+        }
+
+        return nextSensor;
+    }
+
+    public void setPredictionProcess () {
+        predictionProcess = new ArrayList<>();
+        predictionProcess.add(sensor);
+
+        while(true) {
+            ArrayList<Integer> lastLine = predictionProcess.getLast();
+            ArrayList<Integer> nextLine = createNextSensor(lastLine);
+
+            if(allZeros(nextLine)) {
+                predictionProcess.add(nextLine);
+                break;
+            } else {
+                predictionProcess.add(nextLine);
+            }
+        }
+
+//        System.out.println("Sensors: ");
+//        for(ArrayList<Integer> sensor : predictionProcess) {
+//            System.out.println("differences: ");
+//            for(Integer val : sensor) {
+//                System.out.print(val + " ");
+//            }
+//            System.out.println();
+//        }
+    }
+
+    public void setSensor (String line) {
+        sensor = new ArrayList<>();
+        String[] split = line.split(" ");
         for(String s : split) {
-            inputSensor.add(Integer.parseInt(s));
+            sensor.add(Integer.parseInt(s));
         }
+
+//        System.out.print("Sensor values: ");
+//        for(Integer val : sensor) {
+//            System.out.print(val + " ");
+//        }
+//        System.out.println();
     }
 }
