@@ -1,15 +1,13 @@
 package Day_10;
 
-import java.util.ArrayList;
-
 // create the map and work on the map
-public class Map {
+public class PipeMap {
     // Map of pipes
     private final String data;
     private final int width;
     private final int height;
 
-    public Map(String data, int width, int height) {
+    public PipeMap(String data, int width, int height) {
         this.data = data;
         this.width = width;
         this.height = height;
