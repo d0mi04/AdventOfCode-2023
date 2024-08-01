@@ -16,6 +16,12 @@ public class DataSet {
         return this.lines;
     }
 
+    public void printLines() {
+        for(String line : lines) {
+            System.out.println(line);
+        }
+    }
+
     public ArrayList<String> ReadLines (String filename) {
         ArrayList<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
