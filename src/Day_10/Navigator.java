@@ -80,10 +80,10 @@ public class Navigator {
             }
         }
 
-        return navigate(pipeMap, startPipe, initialDirection);
+        return countSteps(pipeMap, startPipe, initialDirection);
     }
 
-    public int navigate(PipeMap pipeMap, Pipe startPipe, Direction initialDirection) {
+    public int countSteps(PipeMap pipeMap, Pipe startPipe, Direction initialDirection) {
         int step = 0;
         Pipe pipe = startPipe;
         Direction direction = initialDirection;
